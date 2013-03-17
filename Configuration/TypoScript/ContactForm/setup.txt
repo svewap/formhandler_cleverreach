@@ -1,0 +1,176 @@
+
+
+
+plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
+
+    # Common configuration
+    name = Cleverreach Contact Example
+    debug = {$plugin.tx_formhandlercleverreach.debug}
+    addErrorAnchors = 0
+    templateFile = EXT:formhandler_cleverreach/Resources/Private/Templates/example_contact.html
+    langFile.1 = EXT:formhandler_cleverreach/Resources/Private/Language/formhandler.xml
+    
+    cssFile {
+        10 = TEXT
+        10.value = EXT:formhandler_cleverreach/Resources/Public/CSS/base.css
+        20 = TEXT
+        20.value = EXT:formhandler_cleverreach/Resources/Public/CSS/forms.css
+        25 = TEXT
+        25.value = EXT:formhandler_cleverreach/Resources/Public/CSS/special.css
+        30 = TEXT
+        30.value = EXT:formhandler_cleverreach/Resources/Public/CSS/colors.css
+    }
+    
+    
+    additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
+    
+    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+    
+    formValuesPrefix = formhandler
+    
+    formID = contact-form
+    
+    masterTemplateFile = TEXT
+    masterTemplateFile.value = typo3conf/ext/formhandler_cleverreach/Resources/Private/Templates/mastertemplate.html
+    
+    
+    fillValueMarkersBeforeLangMarkers = 1
+
+    # HTML wrapping by validation error
+        singleErrorTemplate {
+        totalWrap = <div class="error">|</div>
+        singleWrap = <span class="message">|</span>
+    }
+
+
+    # Validators configuration
+    validators {
+        1 {
+            class = Validator_Default
+            config {
+                fieldConf {
+                    company {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    firstname {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    lastname {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    email {
+                        errorCheck.1 = required
+                        errorCheck.2 = email
+                    }
+                    telephone {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    # Interceptors configuration
+    #initInterceptors {
+    #    1 {
+    #        class = Tx_Formhandler_Interceptor_Filtreatment
+    #    }
+    #}
+
+    # Loggers configuration
+    #loggers {
+    #    1 {
+    #        class = Tx_Formhandler_Logger_DB
+    #    }
+    #}
+    
+
+    # Finishers configuration
+    finishers {
+        
+        
+        1.class = Finisher_Mail
+        1.config {
+            checkBinaryCrLf = message
+            admin {
+                templateFile = TEXT
+                templateFile.value = typo3conf/ext/formhandler_cleverreach/Resources/Private/Templates/example_contact.html
+                sender_email = {$plugin.tx_formhandlercleverreach.sender_email}
+                to_email = {$plugin.tx_formhandlercleverreach.to_email}
+                subject = TEXT
+                subject.value = Kontaktformular
+            }
+        }
+        
+        3.class = Finisher_SubmittedOK
+        3.config {
+            returns = 1
+        }
+    }
+
+
+    if.1 {
+        conditions.OR1.AND1 = newsletter=yes
+        isTrue {
+            
+            validators.1.config.fieldConf {
+                email {
+                    errorCheck.3 = cleverreachemailoptin
+                    errorCheck.3.config < plugin.tx_formhandlercleverreach.config
+                }
+            }
+            finishers {
+                2.class = Finisher_Subscribe
+                2.config < plugin.tx_formhandlercleverreach.config
+                2.config {
+                
+                    fields {
+                        #api field name
+                        company {
+                            # form fieldname
+                            mapping = company
+                        }
+                        firstname {
+                            mapping = firstname
+                        }
+                        lastname {
+                            mapping = lastname
+                        }
+                        zip {
+                            mapping = postalcode
+                        }
+                        street {
+                            mapping = street
+                        }
+                        city {
+                            mapping = city
+                        }
+                        email {
+                            mapping = email
+                        }
+                        opt_message {
+                            mapping = message
+                        }
+                        interests {
+                            mapping = interests
+                            separator = ;
+                        }
+                    }
+                    
+                    
+                }
+                
+            }
+            
+        }
+    }
+}

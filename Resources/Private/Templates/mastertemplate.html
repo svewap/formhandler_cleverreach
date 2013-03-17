@@ -1,0 +1,313 @@
+<!-- ###master_input### -->
+###error_###fieldname######
+<div class="type-text">
+  <label for="###fieldname###" id="label_###fieldname###" ###is_error_###fieldname######>###LLL:###fieldname###### ###required_###fieldname######</label>
+  <input type="text" size="20" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]" value="###value_###fieldname######"/>
+</div>
+<!-- ###master_input### -->
+
+<!-- ###master_textarea### -->
+###error_###fieldname######    
+<div class="type-text">
+  <label for="###fieldname###" id="label_###fieldname###" ###is_error_###fieldname######>###LLL:###fieldname###### ###required_###fieldname######</label>
+  <textarea rows="3" cols="30" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]">###value_###fieldname######</textarea>
+</div>
+<!-- ###master_textarea### -->
+
+<!-- ###master_input_ajax### -->
+###error_###fieldname######
+<div class="type-text ajax">
+  <label for="###fieldname###">###LLL:###fieldname###### ###required_###fieldname######</label>
+  <input type="text" size="20" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]" value="###value_###fieldname######"/>
+  ###validate_###fieldname######
+</div>
+<!-- ###master_input_ajax### -->
+
+<!-- ###master_textarea_ajax### -->
+###error_###fieldname######    
+<div class="type-text ajax">
+  <label for="###fieldname###">###LLL:###fieldname###### ###required_###fieldname######</label>
+  <textarea rows="3" cols="30" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]">###value_###fieldname######</textarea>
+  ###validate_###fieldname######
+</div>
+<!-- ###master_textarea_ajax### -->
+
+
+<!-- ###master_gender### -->
+###error_gender###    
+<div class="type-select">
+    <label for="gender" ###is_error_gender###>###LLL:gender### ###required_gender###</label>
+    <select id="gender" name="###formValuesPrefix###[gender]" class="select">
+        <option value="">---</option>
+        <option value="m" ###selected_gender_m###>###LLL:gender.m###</option>
+        <option value="f" ###selected_gender_f###>###LLL:gender.f###</option>
+    </select>
+    ###validate_gender###
+</div>
+<!-- ###master_gender### -->
+
+
+
+
+<!-- ###master_interests### -->
+###error_interests###    
+<div class="type-check">
+	<label for="interests-no" ###is_error_interests###>###LLL:interests### ###required_interests###</label>
+	
+	<div class="interests_box">
+        <input type="checkbox" name="###formValuesPrefix###[interests][]" id="interests_emailmarketing" value="emailmarketing" ###checked_interests_emailmarketing###/>
+        <label for="interests_emailmarketing">###LLL:interests_emailmarketing###</label>
+        <div class="clear"></div>
+        <input type="checkbox" name="###formValuesPrefix###[interests][]" id="interests_services" value="services" ###checked_interests_services###/>
+        <label for="interests_services">###LLL:interests_services###</label>
+    </div>
+	
+</div>
+<!-- ###master_interests### -->
+
+
+
+<!-- ###master_file### -->
+###error_###fieldname######
+<div class="type-text type-file">
+  <label for="###fieldname###" ###is_error_###fieldname######>###LLL:###fieldname###### ###required_###fieldname######</label>
+  <input type="file" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]" value="###value_###fieldname######" />
+	<input type="submit" ###submit_reload### class="button submit" value="###LLL:submit_reload###" />
+</div>
+<div class="type-text">
+	<div class="fileupload-info">
+    <span class="label">###LLL:allowedTypes###</span> <span class="info">######fieldname###_allowedTypes###</span>
+  	<span class="label">###LLL:maxSize###</span> <span class="info">######fieldname###_maxSize###</span>
+  	<br />
+  	<span class="label">###LLL:uploadedFiles_count###</span> <span class="info">######fieldname###_fileCount### / ######fieldname###_maxCount###</span>
+	</div>
+</div>
+######fieldname###_uploadedFiles###
+<!-- ###master_file### -->
+
+<!-- ###master_basicfile### -->
+###error_###fieldname######
+<div class="type-text type-file">
+  <label for="###fieldname###" ###is_error_###fieldname######>###LLL:###fieldname###### ###required_###fieldname######</label>
+  <input type="file" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]" value="###value_###fieldname######" />
+</div>
+<div class="type-text">
+	<div class="fileupload-info">
+    <span class="label">###LLL:allowedTypes###</span> <span class="info">######fieldname###_allowedTypes###</span>
+  	<span class="label">###LLL:maxSize###</span> <span class="info">######fieldname###_maxSize###</span>
+	</div>
+</div>
+<!-- ###master_basicfile### -->
+
+<!-- ###master_checkbox### -->
+###error_###fieldname######
+<div class="type-check">
+	<input type="checkbox" id="###fieldname###" name="###formValuesPrefix###[###fieldname###]" value="yes" ###checked_###fieldname###_yes### />
+	<label for="###fieldname###">###LLL:###fieldname######</label>
+</div>
+<!-- ###master_checkbox### -->
+
+<!-- ###master_spamprotection-captcha### -->
+<div class="type-text">
+###error_captchafield###
+	<label>###LLL:captcha### ###required_captchafield###</label>
+	<div class="captcha">	
+		###CAPTCHA###
+		<input type="text" name="###formValuesPrefix###[captchafield]" />
+	</div>
+</div>
+<!-- ###master_spamprotection-captcha### -->
+
+<!-- ###master_spamprotection-jm_recaptcha### -->
+<div class="type-text">
+###error_recaptcha_response_field###
+	<label>###LLL:captcha### *</label>
+	<div class="recaptcha">
+		###RECAPTCHA###
+	</div>
+</div>
+<!-- ###master_spamprotection-jm_recaptcha### -->
+
+<!-- ###master_spamprotection-sr_freecap### -->
+<div class="type-text">
+###error_freecapfield###
+	<label>###SR_FREECAP_NOTICE### ###required_freecapfield###</label>
+	<div class="sr_freecap">
+		###SR_FREECAP_IMAGE###
+		<div class="sr_freecap-input">
+			<input type="text" size="15" id="freecapfield" name="###formValuesPrefix###[freecapfield]" title="###SR_FREECAP_NOTICE###" value="" />
+			###SR_FREECAP_CANT_READ###
+		</div>
+	</div>
+</div>
+<!-- ###master_spamprotection-sr_freecap### -->
+
+<!-- ###master_spamprotection-wt_calculating_captcha### -->
+<div class="type-text">
+###error_wt_calculating_captchafield###
+	<label>###LLL:captcha### ###required_wt_calculating_captchafield###</label>
+	<div class="wt_captcha">
+		###WT_CALCULATING_CAPTCHA###
+		<input type="text" name="###formValuesPrefix###[wt_calculating_captchafield]" />
+	</div>
+</div>
+<!-- ###master_spamprotection-wt_calculating_captcha### -->
+
+<!-- ###master_spamprotection-mathguard### -->
+<div class="type-text">
+###error_mathguard_answer###
+	<label>###LLL:captcha### *</label>
+	<div class="mathguard">	
+		###MATHGUARD###
+	</div>
+</div>
+<!-- ###master_spamprotection-mathguard### -->
+
+<!-- ###master_spamprotection-timecheck### -->
+<input type="hidden" name="###formValuesPrefix###[formtime]" value="###TIMESTAMP###" />
+<!-- ###master_spamprotection-timecheck### -->
+
+<!-- ###master_mandatory### -->
+<p class="mandatory">###LLL:mandatory###</p>
+<!-- ###master_mandatory### -->
+
+<!-- ###master_note### -->
+<span class="note">###LLL:note.###fieldname######</span>
+<!-- ###master_note### -->
+
+<!-- ###master_submit### -->
+  <button type="submit" ###submit_nextStep### class="button submit" /><span>###LLL:submit###</span></button>
+<!-- ###master_submit### -->
+
+<!-- ###master_next### -->
+
+  <button type="submit" ###submit_nextStep### class="button submit next" /><span>###LLL:next###</span></button>
+
+<!-- ###master_next### -->
+
+<!-- ###master_prev### -->
+
+  <button type="submit" ###submit_prevStep### class="button submit prev" /><span>###LLL:prev###</span></button>
+
+<!-- ###master_prev### -->
+
+<!-- ###master_form-start### -->
+<form action="###REL_URL###" method="post" class="yform columnar" id="###fieldname###">
+  ###HIDDEN_FIELDS###
+  <h2>###LLL:label_fieldset###</h2>
+<!-- ###master_form-start### -->
+
+<!-- ###master_multipart-form-start### -->
+<form action="###REL_URL###" method="post" class="yform columnar" id="###fieldname###" enctype="multipart/form-data" >
+  ###HIDDEN_FIELDS###
+  <h2>###LLL:label_fieldset###</h2>
+<!-- ###master_multipart-form-start### -->
+
+<!-- ###master_form-end### -->
+</form>
+<!-- ###master_form-end### -->
+
+<!-- ###master_section-start### -->
+<fieldset>
+<!-- ###master_section-start### -->
+
+<!-- ###master_section-end### -->
+</fieldset>
+<!-- ###master_section-end### -->
+
+<!-- ###master_email-user-start-plain### -->
+
+###LLL:greetings### ###value_name###
+
+###LLL:email_user_text###
+
+<!-- ###master_email-user-start-plain### -->
+
+<!-- ###master_email-user-end-plain### -->
+
+###LLL:email_user_footer###
+<!-- ###master_email-user-end-plain### -->
+
+<!-- ###master_email-admin-start-plain### -->
+
+###LLL:email_admin_text###
+
+<!-- ###master_email-admin-start-plain### -->
+
+<!-- ###master_email-admin-end-plain### -->
+
+###LLL:email_admin_footer###
+<!-- ###master_email-admin-end-plain### -->
+
+<!-- ###master_email-user-start-html### -->
+<p>###LLL:greetings### ###value_name###,</p>
+<br />
+<p>###LLL:email_user_text###</p>
+<br />
+<table>
+<!-- ###master_email-user-start-html### -->
+
+<!-- ###master_email-user-end-html### -->
+</table>
+<br />
+<p>###LLL:email_user_footer###</p>
+<!-- ###master_email-user-end-html### -->
+
+<!-- ###master_email-admin-start-html### -->
+
+<p><strong>###LLL:email_admin_text###</strong></p>
+<br />
+<table>
+<!-- ###master_email-admin-start-html### -->
+
+<!-- ###master_email-admin-end-html### -->
+</table>
+<br />
+<p>###LLL:email_admin_footer###</p>
+<!-- ###master_email-admin-end-html### -->
+
+<!-- ###master_email-line-plain### -->
+###LLL:###fieldname###### ###value_###fieldname######
+<!-- ###master_email-line-plain### -->
+
+<!-- ###master_email-line-html### -->
+<tr>
+	<td valign="top"><strong>###LLL:###fieldname######</strong></td>
+	<td>###value_###fieldname######</td>
+</tr>
+<!-- ###master_email-line-html### -->
+
+<!-- ###master_email-line-html-report### -->
+<tr>
+    <td valign="top"><strong>###LLL:###fieldname###_report###</strong></td>
+    <td>###value_###fieldname######</td>
+</tr>
+<!-- ###master_email-line-html-report### -->
+
+
+<!-- ###master_email-line-html-dropdown### -->
+<tr>
+    <td valign="top"><strong>###LLL:###fieldname###_report###</strong></td>
+    <td>###LLL:###fieldname###.###value_###fieldname######### </td>
+</tr>
+<!-- ###master_email-line-html-dropdown### -->
+
+<!-- ###master_email-line-html-checkbox### -->
+<tr>
+    <td valign="top"><strong>###LLL:###fieldname###_report###</strong></td>
+    <td>###LLL:###value_###fieldname######### </td>
+</tr>
+<!-- ###master_email-line-html-checkbox### -->
+
+
+<!-- ###master_email-line-plain-report### -->
+###LLL:###fieldname###_report### ###value_###fieldname######
+<!-- ###master_email-line-plain-report### -->
+
+<!-- ###master_email-line-plain-dropdown### -->
+###LLL:###fieldname###_report### ###LLL:###fieldname###.###value_###fieldname#########
+<!-- ###master_email-line-plain-dropdown### -->
+
+<!-- ###master_email-line-plain-checkbox### -->
+###LLL:###fieldname###_report### ###LLL:###value_###fieldname#########
+<!-- ###master_email-line-plain-checkbox### -->

@@ -1,0 +1,13 @@
+plugin.tx_formhandlercleverreach {
+	
+	config {
+		apiKey = {$plugin.tx_formhandlercleverreach.apiKey}
+		listId = {$plugin.tx_formhandlercleverreach.listId}
+		formId = {$plugin.tx_formhandlercleverreach.formId}
+		wsdlUrl = {$plugin.tx_formhandlercleverreach.wsdlUrl}
+		source = {$plugin.tx_formhandlercleverreach.source}
+		unsubscribemethod = {$plugin.tx_formhandlercleverreach.unsubscribemethod}
+	}
+	
+}
+

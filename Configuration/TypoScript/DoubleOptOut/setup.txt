@@ -1,0 +1,70 @@
+
+
+
+plugin.Tx_Formhandler.settings.predef.cleverreach_example_doubeoptout {
+
+    # Common configuration
+    name = Cleverreach Double OptOut Example
+    debug = {$plugin.tx_formhandlercleverreach.debug}
+    addErrorAnchors = 0
+    templateFile = EXT:formhandler_cleverreach/Resources/Private/Templates/example_doubleoptout.html
+    langFile.1 = EXT:formhandler_cleverreach/Resources/Private/Language/formhandler.xml
+    cssFile.1 = EXT:formhandler_cleverreach/Resources/Public/CSS/styles.css
+    
+    additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
+    
+    formValuesPrefix = formhandler
+    
+    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+    
+    fillValueMarkersBeforeLangMarkers = 1
+
+    # HTML wrapping by validation error
+    errorListTemplate {
+        totalWrap = <ul>|</ul>
+        singleWrap = <li class="error">|</li>
+    }
+    singleErrorTemplate {
+        singleWrap = <span class="error">|</span><br />
+    }
+
+
+    # Validators configuration
+    validators {
+        1 {
+            class = Tx_Formhandler_Validator_Default
+            config {
+                fieldConf {
+                    email {
+                        errorCheck.1 = required
+                        errorCheck.2 = email
+                        errorCheck.3 = cleverreachemailoptout
+                        errorCheck.3.config < plugin.tx_formhandlercleverreach.config
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    # Finishers configuration
+    finishers {
+        
+        2.class = Tx_Formhandler_Finisher_Unsubscribe
+        2.config < plugin.tx_formhandlercleverreach.config
+        2.config {
+            
+            fields {
+                email {
+                    mapping = email
+                }
+                
+            }
+            
+        }
+        3.class = Tx_Formhandler_Finisher_SubmittedOK
+        3.config {
+            returns = 1
+        }
+    }
+}

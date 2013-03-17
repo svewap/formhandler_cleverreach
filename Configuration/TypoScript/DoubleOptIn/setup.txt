@@ -1,0 +1,111 @@
+
+
+
+plugin.Tx_Formhandler.settings.predef.cleverreach_example_doubleoptin {
+
+    # Common configuration
+    name = Cleverreach Double OptIn Example
+    debug = {$plugin.tx_formhandlercleverreach.debug}
+    addErrorAnchors = 0
+    templateFile = EXT:formhandler_cleverreach/Resources/Private/Templates/example_doubleoptin.html
+    langFile.1 = EXT:formhandler_cleverreach/Resources/Private/Language/formhandler.xml
+    cssFile.1 = EXT:formhandler_cleverreach/Resources/Public/CSS/styles.css
+    
+    additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
+    
+    formValuesPrefix = formhandler
+    
+    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+    
+    masterTemplateFile = TEXT
+    masterTemplateFile.value = EXT:formhandler_cleverreach/Resources/Private/Templates/mastertemplate.html
+
+    
+    
+    fillValueMarkersBeforeLangMarkers = 1
+
+    # HTML wrapping by validation error
+    errorListTemplate {
+        totalWrap = <ul>|</ul>
+        singleWrap = <li class="error">|</li>
+    }
+    singleErrorTemplate {
+        singleWrap = <span class="error">|</span><br />
+    }
+
+
+    # Validators configuration
+    validators {
+        1 {
+            class = Tx_Formhandler_Validator_Default
+            config {
+                fieldConf {
+                    firstname {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    lastname {
+                        errorCheck.1 = required
+                        errorCheck.2 = maxLength
+                        errorCheck.2.value = 50
+                    }
+                    email {
+                        errorCheck.1 = required
+                        errorCheck.2 = email
+                        errorCheck.3 = cleverreachemailoptin
+                        errorCheck.3.config < plugin.tx_formhandlercleverreach.config
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    # Interceptors configuration
+    #initInterceptors {
+    #    1 {
+    #        class = Tx_Formhandler_Interceptor_Filtreatment
+    #    }
+    #}
+
+    # Loggers configuration
+    #loggers {
+    #    1 {
+    #        class = Tx_Formhandler_Logger_DB
+    #    }
+    #}
+    
+
+    # Finishers configuration
+    finishers {
+        
+        2.class = Tx_Formhandler_Finisher_Subscribe
+        2.config < plugin.tx_formhandlercleverreach.config
+        2.config {
+        
+            fields {
+                #api field name
+                firstname {
+                    # form fieldname
+                    mapping = firstname
+                }
+                lastname {
+                    mapping = lastname
+                }
+                email {
+                    mapping = email
+                }
+                registered {
+                    special = sub_tstamp
+                }
+                
+            }
+            
+        }
+        3.class = Tx_Formhandler_Finisher_SubmittedOK
+        3.config {
+            returns = 1
+        }
+    }
+}

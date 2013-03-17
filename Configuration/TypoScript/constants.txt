@@ -1,0 +1,19 @@
+plugin.tx_formhandlercleverreach {
+
+    # cat=plugin.tx_formhandlercleverreach//a; type=string; label=API key: Der API-Key
+    apiKey = 
+    # cat=plugin.tx_formhandlercleverreach//b; type=string; label=List id: Die Gruppen-ID
+    listId = 
+    # cat=plugin.tx_formhandlercleverreach//c; type=string; label=Form id: Die Formular-ID
+    formId = 
+    # cat=plugin.tx_formhandlercleverreach//d; type=string; label=wsdl URL
+    wsdlUrl = http://api.cleverreach.com/soap/interface_v5.1.php?wsdl
+    # cat=plugin.tx_formhandlercleverreach//e; type=string; label=Source name
+    source = TYPO3
+    
+    # cat=plugin.tx_formhandlercleverreach//f; type=options[Set user inactive=inactive,Delete user=delete]; label=How users will be removed
+    unsubscribemethod = inactive
+    
+    # cat=plugin.tx_formhandlercleverreach//e; type=int; label=Debug mode
+    debug = 0
+}

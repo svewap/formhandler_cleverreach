@@ -1,0 +1,8 @@
+plugin.tx_formhandlercleverreach {
+	
+    # cat=plugin.tx_formhandlercleverreach//e; type=string; label=Sender email field
+    sender_email = email
+    # cat=plugin.tx_formhandlercleverreach//e; type=string; label=Receiver email address
+    to_email = 
+    
+}

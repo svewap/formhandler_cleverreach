@@ -1,0 +1,96 @@
+#formhandler_newsletter_form {
+	width: 400px;
+}
+#formhandler_newsletter_form .row {
+	margin-bottom: 10px;
+}
+#formhandler_newsletter_form input.hidden, #formhandler_newsletter_form input[type="hidden"] {
+	display: none;
+	border: none;
+}
+#formhandler_newsletter_form input.submit, #formhandler_newsletter_form input[type="submit"] {
+	border: 1px solid #ccc;
+	width: auto;
+	display: inline;
+	clear: both;
+}
+#formhandler_newsletter_form .mathguard {
+	padding: 0;
+}
+#formhandler_newsletter_form .interests_box {
+	border: 1px solid #dedede;
+	padding: 8px;
+	width: 182px;
+	float: left;
+}
+#formhandler_newsletter_form .contact_box {
+	border: 1px solid #dedede;
+	padding: 8px;
+	width: 200px;
+	margin-left: 200px;
+	float: left;
+}
+#formhandler_newsletter_form .interests_box label, #formhandler_newsletter_form .contact_box label {
+	width: 150px;
+}
+#formhandler_newsletter_form fieldset, #formhandler_newsletter_form input[type="text"], #formhandler_newsletter_form textarea {
+	border: 1px solid #dedede;
+}
+#formhandler_newsletter_form fieldset {
+	padding: 10px 20px 10px 10px;
+	background: #F6F6F6;
+}
+#formhandler_newsletter_form input {
+	padding: 2px 5px;
+}
+.error {
+	color: red;
+	font-weight: bold;
+}
+#formhandler_newsletter_form label {
+	display: block;
+	float: left;
+	width: 120px;
+}
+#formhandler_newsletter_form input[type="text"], #formhandler_newsletter_form textarea {
+	display: block;
+	width: 200px;
+	float: left;
+}
+#formhandler_newsletter_form .clear {
+	clear: both;
+}
+#formhandler_newsletter_form .contexthelp {
+	border: 1px solid #dedede;
+	background-color: #efefef;
+	padding: 5px;
+	display: block;
+	font-size: small;
+}
+#formhandler_newsletter_form .info {
+	float: left;
+	width: 200px;
+	margin-left: 20px;
+}
+
+#formhandler_newsletter_form .mandatory {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 80%;
+}
+#formhandler_newsletter_form button {
+    margin-left: 120px;
+}
+
+#formhandler_newsletter_form input[type="checkbox"] {
+    float: left;
+    margin: 5px 8px 0 123px;
+}
+
+#formhandler_newsletter_form #newsletter_label {
+    width: 220px;
+}
+
+#formhandler_newsletter_form .interests_box input {
+    margin-left: 2px;
+}

@@ -1,0 +1,34 @@
+<!-- ###TEMPLATE_FORM1### begin -->
+
+
+<div id="formhandler">
+<form method="post" id="formhandler_newsletter_form" action="###REL_URL###" enctype="multipart/form-data">
+	<fieldset>
+		<input type="hidden" name="formhandler[submitted]" value="1" />
+
+		<div class="row">
+			###error_email###
+			<label for="email">###LLL:email### ###required_email###</label>
+			<input type="text" name="formhandler[email]" id="email" value="###value_email###"/>
+			<div class="clear"></div>
+		</div>
+		<div class="row">
+		    <span class="mandatory">###LLL:mandatory###</span>
+		</div>
+		<div class="row controlbuttons">
+			
+			<input type="hidden" ###submit_nextStep### value="###LLL:submit###" />
+			<button type="submit"><span>###LLL:submit###</span></button>
+		</div>
+	</fieldset>
+</form>
+</div>
+<!-- ###TEMPLATE_FORM1### end -->
+
+
+<!-- ###TEMPLATE_SUBMITTEDOK### begin -->
+
+<p>An Ihre Email-Adresse wurde ein Bestätigungslink gesendet. Mit diesem Link bestätigen Sie die Abmeldung.</p>
+
+
+<!-- ###TEMPLATE_SUBMITTEDOK### end -->
