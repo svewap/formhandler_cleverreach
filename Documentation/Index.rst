@@ -36,14 +36,11 @@ CleverReach API Client für Formhandler
 :Email:
       typo3YYYY@wappler.systems
 
-:Info 4:
-
-
 :Language:
       de
 
 
-|img-1| |img-2| CleverReach API Client für Formhandler
+CleverReach API Client für Formhandler
 -formhandler\_cleverreachChangeLog
 
 

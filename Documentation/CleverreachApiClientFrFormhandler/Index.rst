@@ -22,8 +22,7 @@ Extension Key: formhandler\_cleverreach
 
 Language: de
 
-Keywords: formhandler, cleverreach, newsletter, mail, forEditors,
-forAdmins
+Keywords: formhandler, cleverreach, newsletter, mail, forEditors, forAdmins
 
 Copyright 2000-2013, Sven Wappler, <typo3YYYY@wappler.systems>
 

@@ -21,6 +21,6 @@ ChangeLog
 - Die gibt es online: `ChangeLog online <http://typo3.org/extensions/rep
   ository/view/formhandler_cleverreach/current/info/ChangeLog/>`_
 
-|img-2| 11
+
 
 
