@@ -24,7 +24,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
     
     additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
     
-    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+    preProcessors.1.class = WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor\CleverReach
     
     formValuesPrefix = formhandler
     
@@ -124,12 +124,12 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
             
             validators.1.config.fieldConf {
                 email {
-                    errorCheck.3 = cleverreachemailoptin
+                    errorCheck.3.class = WapplerSystems\FormhandlerCleverreach\Formhandler\Errorcheck\CleverReachEmailOptin
                     errorCheck.3.config < plugin.tx_formhandlercleverreach.config
                 }
             }
             finishers {
-                2.class = Finisher_Subscribe
+                2.class = WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\Subscribe
                 2.config < plugin.tx_formhandlercleverreach.config
                 2.config {
                 

@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Provides finishers and validators for using the cleverreach API. It comes with many examples and can be directly used without modification.',
 	'category' => 'plugin',
 	'author' => 'Sven Wappler',
-	'author_email' => 'typo3@wapplersystems.de',
+	'author_email' => 'typo3YYYY@wappler.systems',
 	'author_company' => 'WapplerSystems',
 	'shy' => '',
 	'priority' => '',
@@ -27,11 +27,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.2.6',
+	'version' => '1.3.0',
 	'constraints' => array(
 		'depends' => array(
 			'formhandler' => '1.0.0-2.9.99',
-			'typo3' => '4.5.0-6.2.99',
+			'typo3' => '7.1.0-7.6.99',
 		),
 		'conflicts' => array(
 		),

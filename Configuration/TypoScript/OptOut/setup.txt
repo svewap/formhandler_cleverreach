@@ -10,12 +10,13 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optout {
     templateFile = EXT:formhandler_cleverreach/Resources/Private/Templates/example_optout.html
     langFile.1 = EXT:formhandler_cleverreach/Resources/Private/Language/formhandler.xml
     cssFile.1 = EXT:formhandler_cleverreach/Resources/Public/CSS/styles.css
+
     
     additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
     
     formValuesPrefix = formhandler
-    
-    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+
+    preProcessors.1.class = \WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor\CleverReach
     
     fillValueMarkersBeforeLangMarkers = 1
 
@@ -50,7 +51,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optout {
     # Finishers configuration
     finishers {
         
-        2.class = Tx_Formhandler_Finisher_Unsubscribe
+        2.class = WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\Unsubscribe
         2.config < plugin.tx_formhandlercleverreach.config
         2.config {
         
@@ -64,7 +65,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optout {
             }
             
         }
-        3.class = Tx_Formhandler_Finisher_SubmittedOK
+        3.class = Finisher\SubmittedOK
         3.config {
             returns = 1
         }

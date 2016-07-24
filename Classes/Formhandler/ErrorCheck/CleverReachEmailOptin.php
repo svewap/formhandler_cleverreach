@@ -1,8 +1,10 @@
 <?php
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
+
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2012 Sven Wappler <typo3@wapplersystems.de>, WapplerSystems
+*  (c) 2016 Sven Wappler <typo3YYYY@wappler.systems>, WapplerSystems
 *
 *  All rights reserved
 *
@@ -23,13 +25,12 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+
 /**
  *
- * @author	Sven Wappler <typo3@wapplersystems.de>
- * @package	Tx_Formhandler
- * @subpackage	ErrorChecks
+ * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class Tx_Formhandler_ErrorCheck_Cleverreachemailoptin extends Tx_Formhandler_ErrorCheck_Cleverreachemail {
+class CleverReachEmailOptin extends CleverReachEmail {
 
 	public function check() {
 		$checkFailed = parent::check();

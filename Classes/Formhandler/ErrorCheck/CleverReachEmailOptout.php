@@ -1,8 +1,10 @@
 <?php
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
+
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2012 Sven Wappler <typo3@wapplersystems.de>, WapplerSystems
+*  (c) 2016 Sven Wappler <typo3YYYY@wappler.systems>, WapplerSystems
 *
 *  All rights reserved
 *
@@ -23,30 +25,23 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * Checks if the email is in cleverreach database
- *
- * @author	Sven Wappler <typo3@wapplersystems.de>
- * @package	Tx_Formhandler
- * @subpackage	ErrorChecks
- */
-class Tx_Formhandler_ErrorCheck_Cleverreachemail extends Tx_Formhandler_AbstractErrorCheck {
 
-	protected $subscriber_found = FALSE;
-	
-	protected $subscriber_active = FALSE;
+
+/**
+ *
+ * @author	Sven Wappler <typo3YYYY@wappler.systems>
+ */
+class CleverReachEmailOptout extends CleverReachEmail {
 
 	public function check() {
-		$checkFailed = '';
+		$checkFailed = parent::check();
+		if ($checkFailed != '') return $checkFailed;
 		
-		$soap = new SoapClient($this->settings['params']['config.']['wsdlUrl']);
-		
-		$return = $soap->receiverGetByEmail($this->settings['params']['config.']['apiKey'], $this->settings['params']['config.']['listId'], trim($this->gp[$this->formFieldName]),0);
-		if ($return->statuscode == 1) return "apikey";
-		
-		$this->subscriber_active = $return->data->active;
-		
-		$this->subscriber_found = ($return->status == Tx_Formhandler_Finisher_CleverReach::STATUS_SUCCESS);
+		if (!$this->subscriber_found || !$this->subscriber_active) {
+			// nicht im System oder inaktiv
+			
+			$checkFailed = $this->getCheckFailed();
+		}
 		
 		return $checkFailed;
 	}

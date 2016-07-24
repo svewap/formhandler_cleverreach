@@ -14,8 +14,8 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optin {
     additionalIncludePaths.1 = EXT:formhandler_cleverreach/Classes/Formhandler
     
     formValuesPrefix = formhandler
-    
-    preProcessors.1.class = Tx_Formhandler_PreProcessor_CleverReach
+
+    preProcessors.1.class = \WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor\CleverReach
     
     fillValueMarkersBeforeLangMarkers = 1
 
@@ -32,7 +32,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optin {
     # Validators configuration
     validators {
         1 {
-            class = Tx_Formhandler_Validator_Default
+            class = Validator\Default
             config {
                 fieldConf {
                     firstname {
@@ -48,7 +48,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optin {
                     email {
                         errorCheck.1 = required
                         errorCheck.2 = email
-                        errorCheck.3 = cleverreachemailoptin
+                        errorCheck.3 = WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReachEmailOptin
                         errorCheck.3.config < plugin.tx_formhandlercleverreach.config
                     }
                     
@@ -57,25 +57,11 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optin {
         }
     }
 
-    # Interceptors configuration
-    #initInterceptors {
-    #    1 {
-    #        class = Tx_Formhandler_Interceptor_Filtreatment
-    #    }
-    #}
-
-    # Loggers configuration
-    #loggers {
-    #    1 {
-    #        class = Tx_Formhandler_Logger_DB
-    #    }
-    #}
-    
 
     # Finishers configuration
     finishers {
         
-        2.class = Tx_Formhandler_Finisher_Subscribe
+        2.class = WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\Subscribe
         2.config < plugin.tx_formhandlercleverreach.config
         2.config {
         
@@ -97,7 +83,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_optin {
             }
             
         }
-        3.class = Tx_Formhandler_Finisher_SubmittedOK
+        3.class = Finisher\SubmittedOK
         3.config {
             returns = 1
         }

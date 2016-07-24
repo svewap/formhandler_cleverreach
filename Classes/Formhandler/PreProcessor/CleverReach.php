@@ -1,8 +1,10 @@
 <?php
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor;
+
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2012 Sven Wappler <typo3@wapplersystems.de>, WapplerSystems
+*  (c) 2016 Sven Wappler <typo3YYYY@wappler.systems>, WapplerSystems
 *
 *  All rights reserved
 *
@@ -23,26 +25,28 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Typoheads\Formhandler\PreProcessor\AbstractPreProcessor;
+
 /**
  *
- * @author	Sven Wappler <typo3@wapplersystems.de>
- * @package	Tx_Formhandler
- * @subpackage	ErrorChecks
+ * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class Tx_Formhandler_ErrorCheck_Cleverreachemailoptout extends Tx_Formhandler_ErrorCheck_Cleverreachemail {
+class CleverReach extends AbstractPreProcessor {
 
-	public function check() {
-		$checkFailed = parent::check();
-		if ($checkFailed != '') return $checkFailed;
+	/**
+	 * The main method called by the controller
+	 *
+	 * @return array GP
+	 */
+	public function process() {
 		
-		if (!$this->subscriber_found || !$this->subscriber_active) {
-			// nicht im System oder inaktiv
-			
-			$checkFailed = $this->getCheckFailed();
+		if (!class_exists('SoapClient')) {
+			$this->utilityFuncs->throwException('SoapClient not available! Please install the php extension.');
 		}
-		
-		return $checkFailed;
+
+		return $this->gp;
 	}
 
+
+
 }
-?>
