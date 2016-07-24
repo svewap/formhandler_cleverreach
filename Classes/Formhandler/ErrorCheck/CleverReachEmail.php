@@ -27,6 +27,7 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
 
 
 use Typoheads\Formhandler\Validator\ErrorCheck\AbstractErrorCheck;
+use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
 
 /**
  * Checks if the email is in cleverreach database
@@ -42,7 +43,7 @@ class CleverReachEmail extends AbstractErrorCheck {
 	public function check() {
 		$checkFailed = '';
 		
-		$soap = new \SoapClient($this->settings['params']['config.']['wsdlUrl']);
+		$soap = new SoapClient($this->settings['params']['config.']['wsdlUrl']);
 		
 		$return = $soap->receiverGetByEmail($this->settings['params']['config.']['apiKey'], $this->settings['params']['config.']['listId'], trim($this->gp[$this->formFieldName]),0);
 		if ($return->statuscode == 1) return "apikey";

@@ -25,6 +25,7 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
 
 /**
  *
@@ -50,7 +51,7 @@ class Subscribe extends CleverReach {
 	 */
 	protected function addReceiver() {
 
-		$soap = new \SoapClient($this->settings['wsdlUrl']);
+		$soap = new SoapClient($this->settings['wsdlUrl']);
 		
 		$userdata = array();
 		

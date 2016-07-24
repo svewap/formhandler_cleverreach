@@ -25,6 +25,8 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
+
 /**
  *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
@@ -49,7 +51,7 @@ class Unsubscribe extends CleverReach {
 	 */
 	protected function removeReceiver() {
 
-		$soap = new \SoapClient($this->settings['wsdlUrl']);
+		$soap = new SoapClient($this->settings['wsdlUrl']);
 		$userdata = $this->parseFields('fields.');
 		
 		
@@ -69,7 +71,7 @@ class Unsubscribe extends CleverReach {
 			
 		} else {
 			
-			$return = $soap->formsUnsubscribeMail($this->settings['apiKey'],$this->settings['formId'],$userdata['email']);
+			$return = $soap->formsSendUnsubscribeMail($this->settings['apiKey'],$this->settings['formId'],$userdata['email']);
 			
 			if ($return->status == CleverReach::STATUS_SUCCESS) {
 				$this->utilityFuncs->debugMessage("Unsubscribe mail sent");
