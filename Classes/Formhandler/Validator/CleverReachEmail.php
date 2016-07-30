@@ -54,7 +54,7 @@ abstract class CleverReachEmail extends AbstractValidator {
 
         if ($return->statuscode == 1) return "apikey";
 		
-		$this->subscriber_active = ($return->data->activated == 1);
+		$this->subscriber_active = ($return->data->active != 0);
 		
 		$this->subscriber_found = ($return->status == \WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReach::STATUS_SUCCESS);
 		
