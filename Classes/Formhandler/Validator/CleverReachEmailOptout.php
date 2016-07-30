@@ -1,5 +1,5 @@
 <?php
-namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Validator;
 
 /***************************************************************
 *  Copyright notice
@@ -26,7 +26,6 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
 ***************************************************************/
 
 
-
 /**
  *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
@@ -40,11 +39,31 @@ class CleverReachEmailOptout extends CleverReachEmail {
 		if (!$this->subscriber_found || !$this->subscriber_active) {
 			// nicht im System oder inaktiv
 			
-			$checkFailed = $this->getCheckFailed();
+			$checkFailed = "cleverreachemailoptout";
 		}
 		
 		return $checkFailed;
 	}
+
+
+    public function validate(&$errors)
+    {
+
+        $this->utilityFuncs->debugMessage('call cleverreach email optout validator');
+
+        $checkFailed = $this->check();
+
+        $errorFieldName = $this->settings['field'];
+
+        if (strlen($checkFailed) > 0) {
+            if (!is_array($errors[$errorFieldName])) {
+                $errors[$errorFieldName] = [];
+            }
+            $errors[$errorFieldName][] = $checkFailed;
+        }
+
+        return empty($errors);
+    }
 
 }
 ?>

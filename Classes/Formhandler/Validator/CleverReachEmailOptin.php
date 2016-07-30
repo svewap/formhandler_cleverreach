@@ -1,5 +1,5 @@
 <?php
-namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Validator;
 
 /***************************************************************
 *  Copyright notice
@@ -26,34 +26,45 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
 ***************************************************************/
 
 
-use Typoheads\Formhandler\Validator\ErrorCheck\AbstractErrorCheck;
-use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
-
 /**
- * Checks if the email is in cleverreach database
  *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class CleverReachEmail extends AbstractErrorCheck {
-
-	protected $subscriber_found = FALSE;
-	
-	protected $subscriber_active = FALSE;
+class CleverReachEmailOptin extends CleverReachEmail {
 
 	public function check() {
-		$checkFailed = '';
+		$checkFailed = parent::check();
+		if ($checkFailed != '') return $checkFailed;
 		
-		$soap = new SoapClient($this->settings['params']['config.']['wsdlUrl']);
-		
-		$return = $soap->receiverGetByEmail($this->settings['params']['config.']['apiKey'], $this->settings['params']['config.']['listId'], trim($this->gp[$this->formFieldName]),0);
-		if ($return->statuscode == 1) return "apikey";
-		
-		$this->subscriber_active = $return->data->active;
-		
-		$this->subscriber_found = ($return->status == \WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReach::STATUS_SUCCESS);
+		if ($this->subscriber_found && $this->subscriber_active) {
+			// ups, schon in der liste drin
+			$checkFailed = 'cleverreachemailoptin';
+		}
 		
 		return $checkFailed;
 	}
+
+
+    public function validate(&$errors)
+    {
+
+        $this->utilityFuncs->debugMessage('call cleverreach email optin validator');
+
+        $checkFailed = $this->check();
+
+        $errorFieldName = $this->settings['field'];
+
+        if (strlen($checkFailed) > 0) {
+            if (!is_array($errors[$errorFieldName])) {
+                $errors[$errorFieldName] = [];
+            }
+            $errors[$errorFieldName][] = $checkFailed;
+        }
+
+        return empty($errors);
+    }
+
+
 
 }
 ?>

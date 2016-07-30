@@ -51,6 +51,8 @@ class Unsubscribe extends CleverReach {
 	 */
 	protected function removeReceiver() {
 
+        $this->utilityFuncs->debugMessage('call remove receiver');
+
 		$soap = new SoapClient($this->settings['wsdlUrl']);
 		$userdata = $this->parseFields('fields.');
 		
@@ -80,6 +82,8 @@ class Unsubscribe extends CleverReach {
 			}
 			
 		}
+
+        $this->utilityFuncs->debugMessage('cleverreach returns values: '.print_r($return,true));
 
 
 	}

@@ -15,7 +15,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_doubeoptout {
     
     formValuesPrefix = formhandler
 
-    preProcessors.1.class = \WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor\CleverReach
+    preProcessors.1.class = WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor\CleverReach
     
     fillValueMarkersBeforeLangMarkers = 1
 
@@ -32,17 +32,21 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_doubeoptout {
     # Validators configuration
     validators {
         1 {
-            class = Tx_Formhandler_Validator_Default
+            class = Validator\Default
             config {
                 fieldConf {
                     email {
                         errorCheck.1 = required
                         errorCheck.2 = email
-                        errorCheck.3.class = WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck\CleverReachEmailOptout
-                        errorCheck.3.config < plugin.tx_formhandlercleverreach.config
                     }
-                    
                 }
+            }
+        }
+        2 {
+            class = WapplerSystems\FormhandlerCleverreach\Formhandler\Validator\CleverReachEmailOptout
+            config < plugin.tx_formhandlercleverreach.config
+            config {
+                field = email
             }
         }
     }

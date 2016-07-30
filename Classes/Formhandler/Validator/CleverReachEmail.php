@@ -1,5 +1,5 @@
 <?php
-namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
+namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Validator;
 
 /***************************************************************
 *  Copyright notice
@@ -25,25 +25,42 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\ErrorCheck;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Typoheads\Formhandler\Validator\AbstractValidator;
+use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
 
 /**
+ * Checks if the email is in cleverreach database
  *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class CleverReachEmailOptin extends CleverReachEmail {
+abstract class CleverReachEmail extends AbstractValidator {
+
+	protected $subscriber_found = FALSE;
+	
+	protected $subscriber_active = FALSE;
+
+
 
 	public function check() {
-		$checkFailed = parent::check();
-		if ($checkFailed != '') return $checkFailed;
+		$checkFailed = '';
 		
-		if ($this->subscriber_found && $this->subscriber_active) {
-			// ups, schon in der liste drin
-			
-			$checkFailed = $this->getCheckFailed();
-		}
+		$soap = new SoapClient($this->settings['wsdlUrl']);
+
+        $formFieldName = $this->settings['field'];
+		
+		$return = $soap->receiverGetByEmail($this->settings['apiKey'], $this->settings['listId'], trim($this->gp[$formFieldName]),0);
+
+        $this->utilityFuncs->debugMessage('cleverreach return values: '.print_r($return,true));
+
+        if ($return->statuscode == 1) return "apikey";
+		
+		$this->subscriber_active = ($return->data->activated == 1);
+		
+		$this->subscriber_found = ($return->status == \WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReach::STATUS_SUCCESS);
 		
 		return $checkFailed;
 	}
+
 
 }
 ?>

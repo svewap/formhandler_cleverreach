@@ -42,6 +42,9 @@
 			<label index="error_email_apikey">Wrong API key!</label>
 			<label index="error_contact_via_required">Please select how to contact You!</label>
 			<label index="mandatory">Fields marked with * are required!</label>
+
+			<label index="error_email_cleverreachemailoptin">Email address is already registered!</label>
+			<label index="error_email_cleverreachemailoptout">Email address is not in our newsletter system.</label>
 			
 			<label index="newsletter">Yes, I want to receive newsletters.</label>
 						

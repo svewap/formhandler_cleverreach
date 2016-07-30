@@ -46,7 +46,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
     # Validators configuration
     validators {
         1 {
-            class = Validator_Default
+            class = Validator\Default
             config {
                 fieldConf {
                     company {
@@ -98,7 +98,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
     finishers {
         
         
-        1.class = Finisher_Mail
+        1.class = Finisher\Mail
         1.config {
             checkBinaryCrLf = message
             admin {
@@ -111,7 +111,7 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
             }
         }
         
-        3.class = Finisher_SubmittedOK
+        3.class = Finisher\SubmittedOK
         3.config {
             returns = 1
         }
@@ -122,10 +122,11 @@ plugin.Tx_Formhandler.settings.predef.cleverreach_example_contact {
         conditions.OR1.AND1 = newsletter=yes
         isTrue {
             
-            validators.1.config.fieldConf {
-                email {
-                    errorCheck.3.class = WapplerSystems\FormhandlerCleverreach\Formhandler\Errorcheck\CleverReachEmailOptin
-                    errorCheck.3.config < plugin.tx_formhandlercleverreach.config
+            validators.2 {
+                class = WapplerSystems\FormhandlerCleverreach\Formhandler\Validator\CleverReachEmailOptout
+                config < plugin.tx_formhandlercleverreach.config
+                config {
+                    field = email
                 }
             }
             finishers {

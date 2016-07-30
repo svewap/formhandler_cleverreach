@@ -39,7 +39,7 @@ class CleverReach extends AbstractPreProcessor {
 	 * @return array GP
 	 */
 	public function process() {
-		
+
 		if (!class_exists('SoapClient')) {
 			$this->utilityFuncs->throwException('SoapClient not available! Please install the php extension.');
 		}

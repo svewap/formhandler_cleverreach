@@ -94,7 +94,6 @@ class Subscribe extends CleverReach {
             );
 			
 			$return = $soap->formsSendActivationMail($this->settings['apiKey'],$this->settings['formId'],$attributes['email'],$doidata);
-            print_r($return);
 
 			if ($return->status == CleverReach::STATUS_SUCCESS) {
 				$this->utilityFuncs->debugMessage("Activation mail sent");
@@ -104,6 +103,8 @@ class Subscribe extends CleverReach {
 			
 			
 		}
+
+        $this->utilityFuncs->debugMessage('cleverreach returns values: '.print_r($return,true));
 
 
 	}
