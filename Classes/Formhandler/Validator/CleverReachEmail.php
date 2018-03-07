@@ -33,34 +33,32 @@ use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
  *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-abstract class CleverReachEmail extends AbstractValidator {
+abstract class CleverReachEmail extends AbstractValidator
+{
+    protected $subscriber_found = false;
 
-	protected $subscriber_found = FALSE;
-	
-	protected $subscriber_active = FALSE;
+    protected $subscriber_active = false;
 
+    public function check()
+    {
+        $checkFailed = '';
 
-
-	public function check() {
-		$checkFailed = '';
-		
-		$soap = new SoapClient($this->settings['wsdlUrl']);
+        $soap = new SoapClient($this->settings['wsdlUrl']);
 
         $formFieldName = $this->settings['field'];
-		
-		$return = $soap->receiverGetByEmail($this->settings['apiKey'], $this->settings['listId'], trim($this->gp[$formFieldName]),0);
 
-        $this->utilityFuncs->debugMessage('cleverreach return values: '.print_r($return,true));
+        $return = $soap->receiverGetByEmail($this->settings['apiKey'], $this->settings['listId'], trim($this->gp[$formFieldName]), 0);
 
-        if ($return->statuscode == 1) return "apikey";
-		
-		$this->subscriber_active = ($return->data->active != 0);
-		
-		$this->subscriber_found = ($return->status == \WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReach::STATUS_SUCCESS);
-		
-		return $checkFailed;
-	}
+        $this->utilityFuncs->debugMessage('cleverreach return values: ' . print_r($return, true));
 
+        if ($return->statuscode == 1) {
+            return 'apikey';
+        }
 
+        $this->subscriber_active = ($return->data->active != 0);
+
+        $this->subscriber_found = ($return->status == \WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher\CleverReach::STATUS_SUCCESS);
+
+        return $checkFailed;
+    }
 }
-?>

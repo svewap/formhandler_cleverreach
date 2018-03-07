@@ -28,13 +28,11 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher;
 use Typoheads\Formhandler\Finisher\AbstractFinisher;
 
 /**
- *
  * @author    Sven Wappler <typo3YYYY@wappler.systems>
  */
 class CleverReach extends AbstractFinisher
 {
-
-    const STATUS_SUCCESS = "SUCCESS";
+    const STATUS_SUCCESS = 'SUCCESS';
 
     /**
      * The main method called by the controller
@@ -52,24 +50,23 @@ class CleverReach extends AbstractFinisher
      */
     protected function convertAttributes($formdata)
     {
-        $attributes = array();
+        $attributes = [];
 
         foreach ($formdata as $key => $val) {
-            $attributes[] = array('key' => str_replace(" ", "_", strtolower($key)), 'value' => $val);
+            $attributes[] = ['key' => str_replace(' ', '_', strtolower($key)), 'value' => $val];
         }
 
         return $attributes;
     }
-
 
     /**
      * Parses mapping settings and builds an array holding the query fields information.
      *
      * @return array The query fields
      */
-    protected function parseFields($key = "fields.")
+    protected function parseFields($key = 'fields.')
     {
-        $queryFields = array();
+        $queryFields = [];
         if (!is_array($this->settings[$key])) {
             return $queryFields;
         }
@@ -117,13 +114,10 @@ class CleverReach extends AbstractFinisher
                         }
                         $fieldValue = implode($separator, $fieldValue);
                     }
-
-
                 }
             } else {
                 $fieldValue = $options;
             }
-
 
             $queryFields[$fieldname] = $fieldValue;
 
@@ -134,7 +128,6 @@ class CleverReach extends AbstractFinisher
         return $queryFields;
     }
 
-
     /**
      * Fetches the global TypoScript settings of the Formhandler
      *
@@ -144,6 +137,4 @@ class CleverReach extends AbstractFinisher
     {
         return $this->configuration->getSettings();
     }
-
-
 }
