@@ -28,66 +28,55 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\Finisher;
 use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
 
 /**
- *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class Unsubscribe extends CleverReach {
+class Unsubscribe extends CleverReach
+{
 
-	/**
-	 * The main method called by the controller
-	 *
-	 * @return array The probably modified GET/POST parameters
-	 */
-	public function process() {
+    /**
+     * The main method called by the controller
+     *
+     * @return array The probably modified GET/POST parameters
+     */
+    public function process()
+    {
+        $this->removeReceiver();
 
-		$this->removeReceiver();
+        return $this->gp;
+    }
 
-		return $this->gp;
-	}
-
-	/**
-	 *
-	 * @return void
-	 */
-	protected function removeReceiver() {
-
+    /**
+     *
+     */
+    protected function removeReceiver()
+    {
         $this->utilityFuncs->debugMessage('call remove receiver');
 
-		$soap = new SoapClient($this->settings['wsdlUrl']);
-		$userdata = $this->parseFields('fields.');
-		
-		
-		if ($this->settings['directUnsubscription'] == "1") {
-			
-			if ($this->settings['unsubscribemethod'] == "delete") {
-				$return = $soap->receiverDelete($this->settings['apiKey'],$this->settings['listId'],$userdata['email']);
-			} else {
-				$return = $soap->receiverSetInactive($this->settings['apiKey'],$this->settings['listId'],$userdata['email']);
-			}
-			
-			if ($return->status == CleverReach::STATUS_SUCCESS) {
-				$this->utilityFuncs->debugMessage("User removed successfully");
-			} else {
-				$this->utilityFuncs->debugMessage("Error at removing \"".$userdata['email']."\": ". $return->message);
-			}
-			
-		} else {
-			
-			$return = $soap->formsSendUnsubscribeMail($this->settings['apiKey'],$this->settings['formId'],$userdata['email']);
-			
-			if ($return->status == CleverReach::STATUS_SUCCESS) {
-				$this->utilityFuncs->debugMessage("Unsubscribe mail sent");
-			} else {
-				$this->utilityFuncs->debugMessage("Unsubscription error for \"".$userdata['email']."\": ". $return->message);
-			}
-			
-		}
+        $soap = new SoapClient($this->settings['wsdlUrl']);
+        $userdata = $this->parseFields('fields.');
 
-        $this->utilityFuncs->debugMessage('cleverreach returns values: '.print_r($return,true));
+        if ($this->settings['directUnsubscription'] == '1') {
+            if ($this->settings['unsubscribemethod'] == 'delete') {
+                $return = $soap->receiverDelete($this->settings['apiKey'], $this->settings['listId'], $userdata['email']);
+            } else {
+                $return = $soap->receiverSetInactive($this->settings['apiKey'], $this->settings['listId'], $userdata['email']);
+            }
 
+            if ($return->status == CleverReach::STATUS_SUCCESS) {
+                $this->utilityFuncs->debugMessage('User removed successfully');
+            } else {
+                $this->utilityFuncs->debugMessage('Error at removing "' . $userdata['email'] . '": ' . $return->message);
+            }
+        } else {
+            $return = $soap->formsSendUnsubscribeMail($this->settings['apiKey'], $this->settings['formId'], $userdata['email']);
 
-	}
+            if ($return->status == CleverReach::STATUS_SUCCESS) {
+                $this->utilityFuncs->debugMessage('Unsubscribe mail sent');
+            } else {
+                $this->utilityFuncs->debugMessage('Unsubscription error for "' . $userdata['email'] . '": ' . $return->message);
+            }
+        }
 
-
-
+        $this->utilityFuncs->debugMessage('cleverreach returns values: ' . print_r($return, true));
+    }
 }

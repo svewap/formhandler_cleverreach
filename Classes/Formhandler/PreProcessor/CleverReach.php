@@ -28,25 +28,22 @@ namespace WapplerSystems\FormhandlerCleverreach\Formhandler\PreProcessor;
 use Typoheads\Formhandler\PreProcessor\AbstractPreProcessor;
 
 /**
- *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class CleverReach extends AbstractPreProcessor {
+class CleverReach extends AbstractPreProcessor
+{
 
-	/**
-	 * The main method called by the controller
-	 *
-	 * @return array GP
-	 */
-	public function process() {
+    /**
+     * The main method called by the controller
+     *
+     * @return array GP
+     */
+    public function process()
+    {
+        if (!class_exists('SoapClient')) {
+            $this->utilityFuncs->throwException('SoapClient not available! Please install the php extension.');
+        }
 
-		if (!class_exists('SoapClient')) {
-			$this->utilityFuncs->throwException('SoapClient not available! Please install the php extension.');
-		}
-
-		return $this->gp;
-	}
-
-
-
+        return $this->gp;
+    }
 }

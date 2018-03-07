@@ -28,87 +28,77 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\FormhandlerCleverreach\CleverReach\SoapClient;
 
 /**
- *
  * @author	Sven Wappler <typo3YYYY@wappler.systems>
  */
-class Subscribe extends CleverReach {
+class Subscribe extends CleverReach
+{
 
-	/**
-	 * The main method called by the controller
-	 *
-	 * @return array The probably modified GET/POST parameters
-	 */
-	public function process() {
-		
-		$this->addReceiver();
+    /**
+     * The main method called by the controller
+     *
+     * @return array The probably modified GET/POST parameters
+     */
+    public function process()
+    {
+        $this->addReceiver();
 
-		return $this->gp;
-	}
+        return $this->gp;
+    }
 
-	/**
-	 *
-	 * @return void
-	 */
-	protected function addReceiver() {
+    /**
+     *
+     */
+    protected function addReceiver()
+    {
+        $soap = new SoapClient($this->settings['wsdlUrl']);
 
-		$soap = new SoapClient($this->settings['wsdlUrl']);
-		
-		$userdata = array();
-		
-		$userdata['source'] = $this->settings['source'];
-		$userdata['registered'] = time();
-		
-		$attributes = array_merge($this->parseFields('fields.'),$this->parseFields('additionalfields.'));
-		
-		$userdata['email'] = $attributes['email'];
-		
-		$userdata['attributes'] = $this->convertAttributes($attributes);
-		
-		$this->utilityFuncs->debugMessage("Attributes: \"".print_r($userdata['attributes'],true)."\"");
-		
-		// überprüfen, ob schon im System ist
-		$return = $soap->receiverGetByEmail($this->settings['apiKey'],$this->settings['listId'], $userdata['email'],0);
-		
-		$subscriber_found = !($return->statuscode == 20);
+        $userdata = [];
 
-		if (!$subscriber_found) {
-			$return = $soap->receiverAdd($this->settings['apiKey'],$this->settings['listId'],$userdata);
-	
-			if ($return->status == CleverReach::STATUS_SUCCESS) {
-				$this->utilityFuncs->debugMessage("Subscriber \"".$userdata['email']."\" accepted");
-			} else {
-				$this->utilityFuncs->debugMessage("A problem with the new subscriber: ".(string)$return->message);
-			}
-		}
-		
-		if ($this->settings['directSubscription'] == "1") {
-			// sofort aktivieren
-			$return = $soap->receiverSetActive($this->settings['apiKey'],$this->settings['listId'],$userdata['email']);
-			
-		} else {
+        $userdata['source'] = $this->settings['source'];
+        $userdata['registered'] = time();
 
-            $doidata = array(
-                "user_ip" => GeneralUtility::getIndpEnv('REMOTE_ADDR'),
-                "user_agent" => GeneralUtility::getIndpEnv('HTTP_USER_AGENT'),
-                "referer" => GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'),
-            );
-			
-			$return = $soap->formsSendActivationMail($this->settings['apiKey'],$this->settings['formId'],$attributes['email'],$doidata);
+        $attributes = array_merge($this->parseFields('fields.'), $this->parseFields('additionalfields.'));
 
-			if ($return->status == CleverReach::STATUS_SUCCESS) {
-				$this->utilityFuncs->debugMessage("Activation mail sent");
-			} else {
-				$this->utilityFuncs->debugMessage("Activation mail error for \"".$attributes['email']."\": ". $return->message);
-			}
-			
-			
-		}
+        $userdata['email'] = $attributes['email'];
 
-        $this->utilityFuncs->debugMessage('cleverreach returns values: '.print_r($return,true));
+        $userdata['attributes'] = $this->convertAttributes($attributes);
 
+        $this->utilityFuncs->debugMessage('Attributes: "' . print_r($userdata['attributes'], true) . '"');
 
-	}
+        // überprüfen, ob schon im System ist
+        $return = $soap->receiverGetByEmail($this->settings['apiKey'], $this->settings['listId'], $userdata['email'], 0);
 
+        $subscriber_found = !($return->statuscode == 20);
 
+        if (!$subscriber_found) {
+            $return = $soap->receiverAdd($this->settings['apiKey'], $this->settings['listId'], $userdata);
 
+            if ($return->status == CleverReach::STATUS_SUCCESS) {
+                $this->utilityFuncs->debugMessage('Subscriber "' . $userdata['email'] . '" accepted');
+            } else {
+                $this->utilityFuncs->debugMessage('A problem with the new subscriber: ' . (string)$return->message);
+            }
+        }
+
+        if ($this->settings['directSubscription'] == '1') {
+            // sofort aktivieren
+            $return = $soap->receiverSetActive($this->settings['apiKey'], $this->settings['listId'], $userdata['email']);
+        } else {
+            $doidata = [
+                'user_ip' => GeneralUtility::getIndpEnv('REMOTE_ADDR'),
+                'user_agent' => GeneralUtility::getIndpEnv('HTTP_USER_AGENT'),
+                'referer' => GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'),
+            ];
+
+            $return = $soap->formsSendActivationMail($this->settings['apiKey'], $this->settings['formId'], $attributes['email'], $doidata);
+
+            if ($return->status == CleverReach::STATUS_SUCCESS) {
+                $this->utilityFuncs->debugMessage('Activation mail sent');
+            } else {
+                $this->utilityFuncs->debugMessage('Activation mail error for "' . $attributes['email'] . '": ' . $return->message);
+            }
+        }
+
+        $this->utilityFuncs->debugMessage('cleverreach returns values: ' . print_r($return, true));
+    }
 }
